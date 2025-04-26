@@ -67,25 +67,53 @@ const books = [
 // Snack 2 - Il primo libro scontato
 
 // Creare un array (availableBooks) che contiene tutti i libri disponibili.
-const availableBooks = books.filter(b => b.available === true);
-console.log(availableBooks);
+// const availableBooks = books.filter(b => b.available === true);
+// console.log(availableBooks);
 
-// Crea un array (discountedBooks) con gli availableBooks, ciascuno con il prezzo scontato del 20% (mantieni lo stesso formato e arrotonda al centesimo)
-const discountedBooks = availableBooks.map(book => {
-    const price = parseFloat(book.price.replace('€', '')); // parseFloat NUMERI CON LA VIRGOLA
-    const discountedPrice = (price * .8).toFixed(2); // toFixed TOGLIE I NUMERI DOPO LA VIRGOLA CHE NON SERVEONO
-    return {
-        ...book,
-        price: `${discountedPrice}€`
-    }
-})
-console.log(discountedBooks);
+// // Crea un array (discountedBooks) con gli availableBooks, ciascuno con il prezzo scontato del 20% (mantieni lo stesso formato e arrotonda al centesimo)
+// const discountedBooks = availableBooks.map(book => {
+//     const price = parseFloat(book.price.replace('€', '')); // parseFloat NUMERI CON LA VIRGOLA
+//     const discountedPrice = (price * .8).toFixed(2); // toFixed TOGLIE I NUMERI DOPO LA VIRGOLA CHE NON SERVEONO
+//     return {
+//         ...book,
+//         price: `${discountedPrice}€`
+//     }
+// })
+// console.log(discountedBooks);
 
 
 // Salva in una variabile (fullPricedBook) il primo elemento di discountedBooks che ha un prezzo intero (senza centesimi).
-const fullPricedBook = discountedBooks.find(book => {
-    const price = parseFloat(book.price.replace('€', ''));
-    // return price % 1 === 0;
-    return Number.isInteger(price); // HA LA STESSA FUNZIONE CON LA RIGA 88....CI RITORNA UN BOOLEANO TRUE O FALSE SE IL NUMERO E' INTERO
-});
-console.log(fullPricedBook);
+// const fullPricedBook = discountedBooks.find(book => {
+//     const price = parseFloat(book.price.replace('€', ''));
+//     // return price % 1 === 0;
+//     return Number.isInteger(price); // HA LA STESSA FUNZIONE CON LA RIGA 88....CI RITORNA UN BOOLEANO TRUE O FALSE SE IL NUMERO E' INTERO
+// });
+// console.log(fullPricedBook);
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+// Snack 3 - Ordinare gli Autori
+
+// Creare un array (authors) che contiene gli autori dei libri.
+const authors = books.map(b => b.author);
+console.log(authors);
+
+// Crea una variabile booleana (areAuthorsAdults) per verificare se gli autori sono tutti maggiorenni.
+const areAuthorsAdults = authors.every(a => a.age > 18);
+console.log(areAuthorsAdults);
+
+// (se areAuthorsAdult è true, ordina in ordine crescente, altrimenti in ordine decrescente)
+if(areAuthorsAdults) {
+
+    authors.sort((a, b) => a.age - b.age );
+
+} else{
+
+    authors.sort((a, b) => b.age - a.age );
+}
+console.log(authors);
+
+// Ordina l’array authors in base all’età, senza creare un nuovo array.
+authors.sort((a, b) => a.age - b.age);
+console.log(authors);
+
