@@ -92,28 +92,45 @@ const books = [
 
 //-----------------------------------------------------------------------------------------------------------------------------
 
-// Snack 3 - Ordinare gli Autori
+// // Snack 3 - Ordinare gli Autori
 
-// Creare un array (authors) che contiene gli autori dei libri.
-const authors = books.map(b => b.author);
-console.log(authors);
+// // Creare un array (authors) che contiene gli autori dei libri.
+// const authors = books.map(b => b.author);
+// console.log(authors);
 
-// Crea una variabile booleana (areAuthorsAdults) per verificare se gli autori sono tutti maggiorenni.
-const areAuthorsAdults = authors.every(a => a.age > 18);
-console.log(areAuthorsAdults);
+// // Crea una variabile booleana (areAuthorsAdults) per verificare se gli autori sono tutti maggiorenni.
+// const areAuthorsAdults = authors.every(a => a.age > 18);
+// console.log(areAuthorsAdults);
 
-// (se areAuthorsAdult è true, ordina in ordine crescente, altrimenti in ordine decrescente)
-if(areAuthorsAdults) {
+// // (se areAuthorsAdult è true, ordina in ordine crescente, altrimenti in ordine decrescente)
+// if(areAuthorsAdults) {
 
-    authors.sort((a, b) => a.age - b.age );
+//     authors.sort((a, b) => a.age - b.age );
 
-} else{
+// } else{
 
-    authors.sort((a, b) => b.age - a.age );
-}
-console.log(authors);
+//     authors.sort((a, b) => b.age - a.age );
+// }
+// console.log(authors);
 
-// Ordina l’array authors in base all’età, senza creare un nuovo array.
-authors.sort((a, b) => a.age - b.age);
-console.log(authors);
+// // Ordina l’array authors in base all’età, senza creare un nuovo array.
+// authors.sort((a, b) => a.age - b.age);
+// console.log(authors);
 
+//-----------------------------------------------------------------------------------------------------------------------------
+
+// Snack 4 - Calcola l’età media
+
+// Creare un array (ages) che contiene le età degli autori dei libri.
+const ages = books.map(b => b.author.age);
+console.log(ages);
+
+// Calcola la somma delle età (agesSum) usando reduce.
+const agesSum = ages.reduce((accumulator, ages) => {
+    return accumulator + ages;
+}, 0)
+console.log(agesSum);
+
+// Stampa in console l’età media degli autori dei libri.
+const average = agesSum / ages.length;
+console.log(average);
