@@ -121,16 +121,45 @@ const books = [
 
 // Snack 4 - Calcola l’età media
 
-// Creare un array (ages) che contiene le età degli autori dei libri.
-const ages = books.map(b => b.author.age);
-console.log(ages);
+// // Creare un array (ages) che contiene le età degli autori dei libri.
+// const ages = books.map(b => b.author.age);
+// console.log(ages);
 
-// Calcola la somma delle età (agesSum) usando reduce.
-const agesSum = ages.reduce((accumulator, ages) => {
-    return accumulator + ages;
-}, 0)
-console.log(agesSum);
+// // Calcola la somma delle età (agesSum) usando reduce.
+// const agesSum = ages.reduce((accumulator, ages) => {
+//     return accumulator + ages;
+// }, 0)
+// console.log(agesSum);
 
-// Stampa in console l’età media degli autori dei libri.
-const average = agesSum / ages.length;
-console.log(average);
+// // Stampa in console l’età media degli autori dei libri.
+// const average = agesSum / ages.length;
+// console.log(average);
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+// Snack 5 (Bonus) - Raccogli i libri
+
+// Usando la l'API https://boolean-spec-frontend.vercel.app/freetestapi/books/{id} usa la combinazione di .map() e Promise.all(), per creare una funzione (getBooks) che a partire da un array di id (ids), ritorna una promise che risolve un array di libri (books).
+// Testala con l’array [2, 13, 7, 21, 19].
+
+
+//creazione dell'array ids
+const ids = [2, 13, 7, 21, 19];
+
+//creazione della funzione asincrona getBooks che accetta un'array di id
+async function getBooks(ids){
+
+    //salviamo l'API
+    const baseUrl = `https://boolean-spec-frontend.vercel.app/freetestapi/books/`;
+
+    //adesso calcoliamo le book promises che sono un map dei miei id. Per ogni id devo ritornare una promises
+    //Ho trasformato il mio array di id in un array di promise
+    const bookPromises = ids.map(id => fetch(`${baseUrl}${id}`).then(response => response.json())); // response => response.json() -> rappresenta l'oggetto del libro
+
+    //Ottengo un array di cui ogni elemento è il valore del resolve di questa response sopra
+    const books = await Promise.all(bookPromises);
+
+    return books;
+}
+
+getBooks(ids).then(books => console.log(books));
