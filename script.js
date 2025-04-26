@@ -144,22 +144,44 @@ const books = [
 
 
 //creazione dell'array ids
-const ids = [2, 13, 7, 21, 19];
+// const ids = [2, 13, 7, 21, 19];
 
-//creazione della funzione asincrona getBooks che accetta un'array di id
-async function getBooks(ids){
+// //creazione della funzione asincrona getBooks che accetta un'array di id
+// async function getBooks(ids){
 
-    //salviamo l'API
-    const baseUrl = `https://boolean-spec-frontend.vercel.app/freetestapi/books/`;
+//     //salviamo l'API
+//     const baseUrl = `https://boolean-spec-frontend.vercel.app/freetestapi/books/`;
 
-    //adesso calcoliamo le book promises che sono un map dei miei id. Per ogni id devo ritornare una promises
-    //Ho trasformato il mio array di id in un array di promise
-    const bookPromises = ids.map(id => fetch(`${baseUrl}${id}`).then(response => response.json())); // response => response.json() -> rappresenta l'oggetto del libro
+//     //adesso calcoliamo le book promises che sono un map dei miei id. Per ogni id devo ritornare una promises
+//     //Ho trasformato il mio array di id in un array di promise
+//     const bookPromises = ids.map(id => fetch(`${baseUrl}${id}`).then(response => response.json())); // response => response.json() -> rappresenta l'oggetto del libro
 
-    //Ottengo un array di cui ogni elemento è il valore del resolve di questa response sopra
-    const books = await Promise.all(bookPromises);
+//     //Ottengo un array di cui ogni elemento è il valore del resolve di questa response sopra
+//     const books = await Promise.all(bookPromises);
 
-    return books;
-}
+//     return books;
+// }
 
-getBooks(ids).then(books => console.log(books));
+// getBooks(ids).then(books => console.log(books));
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+// Snack 6 (Bonus) - Ordina i libri
+
+// Crea una variabile booleana (areThereAvailableBooks) per verificare se c’è almeno un libro disponibile.
+const areThereAvailableBooks = books.some(b => b.available);
+console.log(areThereAvailableBooks);
+
+// Crea un array (booksByPrice) con gli elementi di books ordinati in base al prezzo (crescente).
+const booksByPrice = [...books].sort((a, b) =>{
+
+    const priceA = parseFloat(a.price.replace('€', ''));
+    const priceB = parseFloat(b.price.replace('€', ''));
+    return priceA - priceB;
+
+});
+// console.log(...books, booksByPrice);
+
+// Ordina l’array booksByPricein base alla disponibilità (prima quelli disponibili), senza creare un nuovo array.
+booksByPrice.sort((a, b) => a.available === b.available ? 0 : a.available ? -1 : 1 );
+console.log(booksByPrice);
